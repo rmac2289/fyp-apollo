@@ -18,8 +18,16 @@ export const COMMENTS = gql`
   }
 `;
 
+const formatDate = (date) => {
+  let YYMMDD = date.slice(0, 10).split("-");
+  let [year, month, day] = [YYMMDD[0], YYMMDD[1], YYMMDD[2]];
+  let time = `${date.slice(11, 16)} UTC `;
+  return `${month}/${day}/${year}, ${time}`;
+};
+
 export const Comments = () => {
   const { loading, error, data } = useQuery(COMMENTS);
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>error</p>;
   const comments = data.parkfinder_comments.map(
@@ -38,7 +46,7 @@ export const Comments = () => {
           <strong>by:</strong> {parkfinder_user && parkfinder_user.user_name}
         </p>
         <p>
-          <strong>on:</strong> {date}
+          <strong>on:</strong> {formatDate(date)}
         </p>
       </ListItem>
     )
