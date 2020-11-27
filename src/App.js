@@ -5,7 +5,6 @@ function App() {
   return (
     <div className="App">
       <Comments />
-      <header className="App-header">Apollo-Client</header>
     </div>
   );
 }

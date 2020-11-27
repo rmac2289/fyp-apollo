@@ -1,10 +1,12 @@
 import React, { Fragment } from "react";
 import { useQuery, gql } from "@apollo/client";
 import AddCommentMutation from "./Mutation";
+import { ListItem, List } from "./Styles";
 
-const COMMENTS = gql`
+export const COMMENTS = gql`
   query getComments {
     parkfinder_comments {
+      id
       park_name
       subject
       comment
@@ -17,12 +19,12 @@ const COMMENTS = gql`
 `;
 
 export const Comments = () => {
-  const { loading, error, data } = useQuery(COMMENTS, { pollInterval: 5000 });
+  const { loading, error, data } = useQuery(COMMENTS);
   if (loading) return <p>Loading...</p>;
   if (error) return <p>error</p>;
   const comments = data.parkfinder_comments.map(
-    ({ park_name, subject, comment, date, parkfinder_user }, index) => (
-      <div key={index % 30}>
+    ({ park_name, subject, comment, date, parkfinder_user, id }) => (
+      <ListItem key={id}>
         <p>
           <strong>park name:</strong> {park_name}
         </p>
@@ -38,13 +40,13 @@ export const Comments = () => {
         <p>
           <strong>on:</strong> {date}
         </p>
-      </div>
+      </ListItem>
     )
   );
   return (
     <Fragment>
       <AddCommentMutation />
-      {comments}
+      <List>{comments}</List>
     </Fragment>
   );
 };

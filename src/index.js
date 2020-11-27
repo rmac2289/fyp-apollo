@@ -9,7 +9,7 @@ const client = new ApolloClient({
   uri: "https://actual-platypus-49.hasura.app/v1/graphql",
   cache: new InMemoryCache(),
 });
-
+console.log(client.cache);
 ReactDOM.render(
   <ApolloProvider client={client}>
     <App />
