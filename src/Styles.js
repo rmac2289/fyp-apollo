@@ -23,6 +23,7 @@ export const Button = styled.button`
   width: 75px;
   padding: 1%;
   margin: 1%;
+  border: 1px solid ${(props) => (props.primary ? "blue" : "red")};
 `;
 export const ListItem = styled.div`
   padding: 2%;
@@ -30,4 +31,18 @@ export const ListItem = styled.div`
 `;
 export const List = styled.div`
   list-style: none;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+`;
+export const ListDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+export const PElem = styled.p`
+  margin: 0;
+`;
+export const ButtonWrapper = styled.div`
+  width: 90%;
+  margin: auto;
 `;
