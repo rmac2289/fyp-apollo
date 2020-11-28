@@ -43,6 +43,7 @@ const AddCommentMutation = () => {
           park_name: parkName,
           subject: subject,
           comment: comment,
+          user_name: "rmac",
         },
       },
     });
