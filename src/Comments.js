@@ -10,7 +10,6 @@ import {
   ButtonWrapper,
 } from "./Styles";
 import { COMMENTS } from "./queries/Queries";
-import { formatDate } from "./Utils";
 
 export const Comments = () => {
   const [max, setMax] = useState(10);
@@ -47,7 +46,9 @@ export const Comments = () => {
           <PElem>
             <strong>text:</strong> {comment}
           </PElem>
-          <div></div>
+          <PElem>
+            <strong>at:</strong> {new Date(date).toLocaleTimeString()}
+          </PElem>
         </ListDiv>
         <ListDiv>
           <PElem>
