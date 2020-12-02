@@ -16,13 +16,7 @@ export const Comments = () => {
   const [max, setMax] = useState(10);
   const [page, setPage] = useState(10);
 
-  const { loading, data, fetchMore } = useQuery(COMMENTS, {
-    // variables: {
-    //   minId: 0,
-    //   maxId: max,
-    // },
-  });
-
+  const { loading, data } = useQuery(COMMENTS);
   const seeMore = () => {
     setMax(max + 10);
   };
@@ -35,10 +29,12 @@ export const Comments = () => {
   const reset = () => {
     return setPage(10);
   };
+
   if (loading) return <p>Loading...</p>;
-  const comments = data.parkfinder_comments.map(
-    ({ park_name, subject, comment, date, parkfinder_user, id }) => (
-      <ListItem key={id}>
+  console.log(data.getComments);
+  const comments = data.getComments.map(
+    ({ park_name, subject, comment, date, user, _id }) => (
+      <ListItem key={_id}>
         <ListDiv>
           <PElem>
             <strong>park name:</strong> {park_name}
@@ -55,10 +51,10 @@ export const Comments = () => {
         </ListDiv>
         <ListDiv>
           <PElem>
-            <strong>by:</strong> {parkfinder_user && parkfinder_user.user_name}
+            <strong>by:</strong> {user && user.user_name}
           </PElem>
           <PElem>
-            <strong>on:</strong> {formatDate(date)}
+            <strong>on:</strong> {new Date(date).toLocaleDateString()}
           </PElem>
         </ListDiv>
       </ListItem>

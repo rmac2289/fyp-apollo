@@ -7,7 +7,7 @@ import { ADD_COMMENT_MUTATION } from "./mutations/Mutations";
 const AddCommentMutation = () => {
   const [subject, setSubject] = useState("");
   const [comment, setComment] = useState("");
-  const [parkName, setParkName] = useState("");
+  const [park_name, setParkName] = useState("");
   const getSubject = (e) => setSubject(e.target.value);
   const getComment = (e) => setComment(e.target.value);
   const getParkName = (e) => setParkName(e.target.value);
@@ -16,7 +16,7 @@ const AddCommentMutation = () => {
     update(cache, { data }) {
       // We use an update function here to write the
       // new value of the COMMENTS query.
-      const newCommentFromResponse = data?.insert_parkfinder_comments;
+      const newCommentFromResponse = data?.addComment;
       const existingComments = cache.readQuery({
         query: COMMENTS,
       });
@@ -25,8 +25,8 @@ const AddCommentMutation = () => {
         cache.writeQuery({
           query: COMMENTS,
           data: {
-            parkfinder_comments: [
-              ...existingComments?.parkfinder_comments,
+            getComments: [
+              ...existingComments?.getComments,
               newCommentFromResponse,
             ],
           },
@@ -39,11 +39,13 @@ const AddCommentMutation = () => {
     e.preventDefault();
     addComment({
       variables: {
-        objects: {
-          park_name: parkName,
-          subject: subject,
-          comment: comment,
-          user_name: "rmac",
+        park_name: park_name,
+        subject: subject,
+        comment: comment,
+        date: new Date().toISOString(),
+        user: {
+          user_name: "username1",
+          _id: "5fc72feeda56a1d5254d1781",
         },
       },
     });
@@ -60,7 +62,7 @@ const AddCommentMutation = () => {
       </Label>
       <Label>
         Park Name
-        <Input type="text" value={parkName} onChange={getParkName} />
+        <Input type="text" value={park_name} onChange={getParkName} />
       </Label>
       <Button primary>Submit</Button>
     </Form>

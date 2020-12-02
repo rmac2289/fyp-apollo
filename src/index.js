@@ -6,10 +6,10 @@ import reportWebVitals from "./reportWebVitals";
 import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 
 const client = new ApolloClient({
-  uri: "https://actual-platypus-49.hasura.app/v1/graphql",
+  uri: "http://localhost:4000/graphql",
   cache: new InMemoryCache(),
 });
-console.log(client.cache);
+console.log(client);
 ReactDOM.render(
   <ApolloProvider client={client}>
     <App />
