@@ -46,3 +46,8 @@ export const ButtonWrapper = styled.div`
   width: 90%;
   margin: auto;
 `;
+
+export const Wrapper = styled.div`
+  width: 90%;
+  margin: auto;
+`;

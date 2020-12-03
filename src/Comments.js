@@ -12,13 +12,10 @@ import {
 import { COMMENTS } from "./queries/Queries";
 
 export const Comments = () => {
-  const [max, setMax] = useState(10);
   const [page, setPage] = useState(10);
 
   const { loading, data } = useQuery(COMMENTS);
-  const seeMore = () => {
-    setMax(max + 10);
-  };
+
   const nextPage = (comments) => {
     if (page + 10 > comments.length) {
       return setPage(comments.length);
@@ -30,7 +27,6 @@ export const Comments = () => {
   };
 
   if (loading) return <p>Loading...</p>;
-  console.log(data.getComments);
   const comments = data.getComments.map(
     ({ park_name, subject, comment, date, user, _id }) => (
       <ListItem key={_id}>
